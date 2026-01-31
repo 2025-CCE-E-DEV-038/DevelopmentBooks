@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingBasket {
-    
+
     private final List<Book> books = new ArrayList<>();
 
     public void addBook(Book book) {
@@ -14,5 +14,9 @@ public class ShoppingBasket {
 
     public int getNumberOfBooks() {
         return books.size();
+    }
+
+    public List<Book> getBooks() {
+        return books;
     }
 }
