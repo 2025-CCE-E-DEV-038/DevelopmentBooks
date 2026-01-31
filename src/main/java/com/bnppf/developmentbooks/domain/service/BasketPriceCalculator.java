@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 
 public class BasketPriceCalculator {
 
-    public BigDecimal computePrice(ShoppingBasket basket) {
-        BigDecimal bookPrice= BigDecimal.valueOf(50);
-        int numberOfBooks= basket.getNumberOfBooks();
-        return bookPrice.multiply(BigDecimal.valueOf(numberOfBooks));
+    private static final BigDecimal BOOK_PRICE = BigDecimal.valueOf(50);
 
+    public BigDecimal computePrice(ShoppingBasket basket) {
+        int numberOfBooks = basket.getNumberOfBooks();
+        return BOOK_PRICE.multiply(BigDecimal.valueOf(numberOfBooks));
     }
 }
