@@ -20,6 +20,9 @@ public class BasketPriceCalculator {
         if (numberOfBooks == numberOfDifferentBooks && numberOfDifferentBooks == 3) {
             return BOOK_PRICE.multiply(BigDecimal.valueOf(numberOfBooks)).multiply(DISCOUNT_MULTIPLIER_3_BOOKS);
         }
+        if (numberOfBooks == numberOfDifferentBooks && numberOfDifferentBooks == 4) {
+            return BOOK_PRICE.multiply(BigDecimal.valueOf(numberOfBooks)).multiply(BigDecimal.valueOf(0.80));
+        }
         return BOOK_PRICE.multiply(BigDecimal.valueOf(numberOfBooks));
     }
 }
