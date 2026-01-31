@@ -1,5 +1,6 @@
 package com.bnppf.developmentbooks.service;
 
+import com.bnppf.developmentbooks.domain.model.Book;
 import com.bnppf.developmentbooks.domain.model.ShoppingBasket;
 import com.bnppf.developmentbooks.domain.service.BasketPriceCalculator;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,19 @@ public class BasketPriceCalculatorTest {
         BasketPriceCalculator calculator = new BasketPriceCalculator();
         ShoppingBasket basket = new ShoppingBasket();
 
-        BigDecimal basketPrice =calculator.computePrice(basket);
+        BigDecimal basketPrice = calculator.computePrice(basket);
 
         assertThat(basketPrice).isZero();
+    }
+
+    @Test
+    void should_return_50_when_basket_has_1_book() {
+        BasketPriceCalculator calculator = new BasketPriceCalculator();
+        ShoppingBasket basket = new ShoppingBasket();
+
+        basket.addBook(new Book());
+        BigDecimal basketPrice = calculator.computePrice(basket);
+
+        assertThat(basketPrice).isEqualTo(BigDecimal.valueOf(50));
     }
 }

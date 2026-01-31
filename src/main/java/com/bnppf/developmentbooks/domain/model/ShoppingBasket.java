@@ -2,6 +2,8 @@ package com.bnppf.developmentbooks.domain.model;
 
 
 public class ShoppingBasket {
-    //Empty body just to make the test compile
 
+    public void addBook(Book book) {
+        //Empty body just to make the test compile
+    }
 }
