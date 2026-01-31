@@ -21,6 +21,12 @@ public class BasketPriceCalculator {
         if (numberOfBooks == numberOfDifferentBooks && DISCOUNT_MULTIPLIER_BY_NUMBER_OF_BOOKS.containsKey(numberOfDifferentBooks)) {
             BigDecimal discountMultiplier = DISCOUNT_MULTIPLIER_BY_NUMBER_OF_BOOKS.get(numberOfDifferentBooks);
             return BOOK_PRICE.multiply(BigDecimal.valueOf(numberOfBooks)).multiply(discountMultiplier);
+        } else {
+            if (numberOfBooks == 4 && numberOfDifferentBooks == 3) {
+                BigDecimal discountMultiplier = DISCOUNT_MULTIPLIER_BY_NUMBER_OF_BOOKS.get(3);
+                BigDecimal threeBooksSetPrice = BOOK_PRICE.multiply(BigDecimal.valueOf(3)).multiply(discountMultiplier);
+                return BOOK_PRICE.add(threeBooksSetPrice);
+            }
         }
         return BOOK_PRICE.multiply(BigDecimal.valueOf(numberOfBooks));
     }
