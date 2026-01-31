@@ -7,6 +7,9 @@ import java.math.BigDecimal;
 public class BasketPriceCalculator {
 
     public BigDecimal computePrice(ShoppingBasket basket) {
-        return BigDecimal.ZERO;
+        BigDecimal bookPrice= BigDecimal.valueOf(50);
+        int numberOfBooks= basket.getNumberOfBooks();
+        return bookPrice.multiply(BigDecimal.valueOf(numberOfBooks));
+
     }
 }
