@@ -46,4 +46,12 @@ public class BasketPriceCalculatorTest {
         return basket;
     }
 
+    @Test
+    void should_return_95_when_basket_has_2_different_books() {
+        ShoppingBasket basket = createBasket("Clean Code", "The Clean Coder");
+        BigDecimal basketPrice = calculator.computePrice(basket);
+
+        assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(95));
+    }
+
 }
