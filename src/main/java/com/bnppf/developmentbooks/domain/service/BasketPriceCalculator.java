@@ -16,6 +16,9 @@ public class BasketPriceCalculator {
         if (numberOfBooks == numberOfDifferentBooks && numberOfDifferentBooks == 2) {
             return BOOK_PRICE.multiply(BigDecimal.valueOf(numberOfBooks)).multiply(DISCOUNT_MULTIPLIER_2_BOOKS);
         }
+        if (numberOfBooks == numberOfDifferentBooks && numberOfDifferentBooks == 3) {
+            return BOOK_PRICE.multiply(BigDecimal.valueOf(numberOfBooks)).multiply(BigDecimal.valueOf(0.90));
+        }
         return BOOK_PRICE.multiply(BigDecimal.valueOf(numberOfBooks));
     }
 }
