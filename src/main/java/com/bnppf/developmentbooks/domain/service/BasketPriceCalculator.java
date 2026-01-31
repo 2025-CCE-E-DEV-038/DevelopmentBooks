@@ -11,7 +11,8 @@ public class BasketPriceCalculator {
     private static final Map<Integer, BigDecimal> DISCOUNT_MULTIPLIER_BY_NUMBER_OF_BOOKS = Map.of(
             2, BigDecimal.valueOf(0.95),
             3, BigDecimal.valueOf(0.90),
-            4, BigDecimal.valueOf(0.80));
+            4, BigDecimal.valueOf(0.80),
+            5, BigDecimal.valueOf(0.75));
 
     public BigDecimal computePrice(ShoppingBasket basket) {
         int numberOfBooks = basket.getBooks().size();
