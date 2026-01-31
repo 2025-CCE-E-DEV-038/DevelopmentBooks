@@ -97,4 +97,18 @@ public class BasketPriceCalculatorTest {
         assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(185));
     }
 
+    @Test
+    void should_optimize_discount_by_favoring_2_sets_of_4_over_set_of_5_and_3() {
+        ShoppingBasket basket = createBasket("Clean Code",
+                "Clean Code",
+                "The Clean Coder",
+                "The Clean Coder",
+                "Clean Architecture",
+                "Clean Architecture",
+                "Test Driven Development by Example",
+                "Working Effectively With Legacy Code");
+        BigDecimal basketPrice = calculator.computePrice(basket);
+
+        assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(320));
+    }
 }
