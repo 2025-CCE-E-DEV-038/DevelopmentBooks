@@ -6,6 +6,7 @@ import com.bnppf.developmentbooks.domain.service.BasketPriceCalculator;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -60,6 +61,17 @@ public class BasketPriceCalculatorTest {
         BigDecimal basketPrice = calculator.computePrice(basket);
 
         assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(135));
+    }
+
+    @Test
+    void should_return_160_when_basket_has_4_different_books() {
+        ShoppingBasket basket = createBasket("Clean Code",
+                "The Clean Coder",
+                "Clean Architecture",
+                "Test Driven Development by Example");
+        BigDecimal basketPrice = calculator.computePrice(basket);
+
+        assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(160));
     }
 
 }
