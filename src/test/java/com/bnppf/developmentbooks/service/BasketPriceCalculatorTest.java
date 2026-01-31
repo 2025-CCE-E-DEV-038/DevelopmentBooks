@@ -54,4 +54,12 @@ public class BasketPriceCalculatorTest {
         assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(95));
     }
 
+    @Test
+    void should_return_135_when_basket_has_3_different_books() {
+        ShoppingBasket basket = createBasket("Clean Code", "The Clean Coder", "Clean Architecture");
+        BigDecimal basketPrice = calculator.computePrice(basket);
+
+        assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(135));
+    }
+
 }
