@@ -12,10 +12,6 @@ public class ShoppingBasket {
         books.add(book);
     }
 
-    public int getNumberOfBooks() {
-        return books.size();
-    }
-
     public List<Book> getBooks() {
         return books;
     }
