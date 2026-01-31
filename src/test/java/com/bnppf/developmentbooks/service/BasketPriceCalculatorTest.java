@@ -11,9 +11,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BasketPriceCalculatorTest {
 
+    private final BasketPriceCalculator calculator = new BasketPriceCalculator();
+
     @Test
     void should_return_zero_when_basket_is_empty() {
-        BasketPriceCalculator calculator = new BasketPriceCalculator();
         ShoppingBasket basket = new ShoppingBasket();
 
         BigDecimal basketPrice = calculator.computePrice(basket);
@@ -23,10 +24,7 @@ public class BasketPriceCalculatorTest {
 
     @Test
     void should_return_50_when_basket_has_1_book() {
-        BasketPriceCalculator calculator = new BasketPriceCalculator();
-        ShoppingBasket basket = new ShoppingBasket();
-
-        basket.addBook(new Book("Clean Code"));
+        ShoppingBasket basket = createBasket("Clean Code");
         BigDecimal basketPrice = calculator.computePrice(basket);
 
         assertThat(basketPrice).isEqualTo(BigDecimal.valueOf(50));
@@ -34,14 +32,18 @@ public class BasketPriceCalculatorTest {
 
     @Test
     void should_return_100_when_basket_has_2_copies_of_same_books() {
-        BasketPriceCalculator calculator = new BasketPriceCalculator();
-        ShoppingBasket basket = new ShoppingBasket();
-
-        basket.addBook(new Book("Clean Code"));
-        basket.addBook(new Book("Clean Code"));
+        ShoppingBasket basket = createBasket("Clean Code", "Clean Code");
         BigDecimal basketPrice = calculator.computePrice(basket);
 
         assertThat(basketPrice).isEqualTo(BigDecimal.valueOf(100));
+    }
+
+    private ShoppingBasket createBasket(String... titles) {
+        ShoppingBasket basket = new ShoppingBasket();
+        for (String title : titles) {
+            basket.addBook(new Book(title));
+        }
+        return basket;
     }
 
 }
