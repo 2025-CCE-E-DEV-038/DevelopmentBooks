@@ -26,9 +26,22 @@ public class BasketPriceCalculatorTest {
         BasketPriceCalculator calculator = new BasketPriceCalculator();
         ShoppingBasket basket = new ShoppingBasket();
 
-        basket.addBook(new Book());
+        basket.addBook(new Book("Clean Code"));
         BigDecimal basketPrice = calculator.computePrice(basket);
 
         assertThat(basketPrice).isEqualTo(BigDecimal.valueOf(50));
     }
+
+    @Test
+    void should_return_100_when_basket_has_2_copies_of_same_books() {
+        BasketPriceCalculator calculator = new BasketPriceCalculator();
+        ShoppingBasket basket = new ShoppingBasket();
+
+        basket.addBook(new Book("Clean Code"));
+        basket.addBook(new Book("Clean Code"));
+        BigDecimal basketPrice = calculator.computePrice(basket);
+
+        assertThat(basketPrice).isEqualTo(BigDecimal.valueOf(100));
+    }
+
 }
