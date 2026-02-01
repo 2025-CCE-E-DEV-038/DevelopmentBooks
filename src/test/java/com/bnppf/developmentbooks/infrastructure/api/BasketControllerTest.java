@@ -1,0 +1,47 @@
+package com.bnppf.developmentbooks.infrastructure.api;
+
+import com.bnppf.developmentbooks.domain.model.ShoppingBasket;
+import com.bnppf.developmentbooks.domain.service.BasketPriceCalculator;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
+
+import java.math.BigDecimal;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@WebMvcTest(BasketController.class)
+class BasketControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+    @MockitoBean
+    private BasketPriceCalculator basketPriceCalculator;
+
+
+    @Test
+    void should_return_a_price_when_the_input_is_valid() throws Exception {
+        when(basketPriceCalculator.computePrice(any(ShoppingBasket.class)))
+                .thenReturn(BigDecimal.valueOf(50.0));
+
+        String jsonPayload = """
+                ["Clean Code"]
+                """;
+
+        mockMvc.perform(post("/api/basket/price")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonPayload))
+                .andExpect(status().isOk())
+                .andExpect(content().string("50.0"));
+
+        verify(basketPriceCalculator).computePrice(any(ShoppingBasket.class));
+    }
+}
