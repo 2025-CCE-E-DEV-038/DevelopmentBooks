@@ -52,4 +52,10 @@ class BasketControllerTest {
 
         verify(basketPriceCalculator).computePrice(any(ShoppingBasket.class));
     }
+    @Test
+    void should_return_400_when_request_body_is_missing() throws Exception {
+        mockMvc.perform(post("/api/basket/price")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
 }
