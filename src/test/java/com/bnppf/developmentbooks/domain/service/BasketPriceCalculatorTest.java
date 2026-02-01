@@ -1,8 +1,7 @@
-package com.bnppf.developmentbooks.service;
+package com.bnppf.developmentbooks.domain.service;
 
 import com.bnppf.developmentbooks.domain.model.Book;
 import com.bnppf.developmentbooks.domain.model.ShoppingBasket;
-import com.bnppf.developmentbooks.domain.service.BasketPriceCalculator;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
