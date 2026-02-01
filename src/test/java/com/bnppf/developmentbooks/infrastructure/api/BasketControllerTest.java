@@ -58,4 +58,16 @@ class BasketControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
+    @Test
+    void should_return_400_when_payload_is_invalid_json() throws Exception {
+        String wrongInput = """
+                {
+                   "books": ["Clean Code"]
+                }""";
+
+        mockMvc.perform(post("/api/basket/price")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(wrongInput))
+                .andExpect(status().isBadRequest());
+    }
 }
