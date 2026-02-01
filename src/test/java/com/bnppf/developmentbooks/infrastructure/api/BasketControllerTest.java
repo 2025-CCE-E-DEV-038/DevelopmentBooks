@@ -36,13 +36,14 @@ class BasketControllerTest {
         when(basketPriceCalculator.computePrice(any(ShoppingBasket.class)))
                 .thenReturn(BigDecimal.valueOf(50.0));
 
-        ShoppingBasket mockBasket=new ShoppingBasket();
+        ShoppingBasket mockBasket = new ShoppingBasket();
         when(basketMapper.toDomain(anyList())).thenReturn(mockBasket);
 
 
         String jsonPayload = """
-                ["Clean Code"]
-                """;
+                {
+                  "books": ["Clean Code"]
+                 }""";
 
         mockMvc.perform(post("/api/basket/price")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -52,17 +53,19 @@ class BasketControllerTest {
 
         verify(basketPriceCalculator).computePrice(any(ShoppingBasket.class));
     }
+
     @Test
     void should_return_400_when_request_body_is_missing() throws Exception {
         mockMvc.perform(post("/api/basket/price")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
+
     @Test
     void should_return_400_when_payload_is_invalid_json() throws Exception {
         String wrongInput = """
                 {
-                   "books": ["Clean Code"]
+                   ["Clean Code","The Clean Coder"]
                 }""";
 
         mockMvc.perform(post("/api/basket/price")

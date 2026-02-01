@@ -117,6 +117,16 @@ mvnw.cmd spring-boot:run
 ### 4. Usage Example
 Once the server is running, you can test the basket price computation endpoint:
 
+**Mac/Linux:**
+``` bash
 curl -X POST http://localhost:8080/api/basket/price \
     -H "Content-Type: application/json" \
-    -d '["Clean Code", "The Clean Coder", "Clean Architecture"]'
+    -d '{"books":["Clean Code", "The Clean Coder"]}'
+```
+
+**Windows:**
+``` cmd
+curl -X POST http://localhost:8080/api/basket/price ^
+-H "Content-Type: application/json" ^
+-d "{\"books\":[\"Clean Code\", \"The Clean Coder\"]}"
+```
