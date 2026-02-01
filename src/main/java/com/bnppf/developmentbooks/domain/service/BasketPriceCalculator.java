@@ -6,6 +6,10 @@ import com.bnppf.developmentbooks.domain.model.ShoppingBasket;
 import java.math.BigDecimal;
 import java.util.*;
 
+/**
+ * Service responsible for calculating the total price of a shopping basket while
+ * applying specific discount rules. The service is optimized to group books into the most optimal sets for the most favorable discount.
+ */
 public class BasketPriceCalculator {
 
     private static final BigDecimal BOOK_PRICE = BigDecimal.valueOf(50);
@@ -14,7 +18,12 @@ public class BasketPriceCalculator {
             3, BigDecimal.valueOf(0.90),
             4, BigDecimal.valueOf(0.80),
             5, BigDecimal.valueOf(0.75));
-
+    /**
+     * Computes the lowest possible price for the given basket.
+     *
+     * @param basket the domain object containing the selected books.
+     * @return the total price as a {@link BigDecimal}.
+     */
     public BigDecimal computePrice(ShoppingBasket basket) {
         if (basket.getBooks().isEmpty()) {
             return BigDecimal.ZERO;

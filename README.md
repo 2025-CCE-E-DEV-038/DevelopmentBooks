@@ -7,6 +7,7 @@ The goal is to compute the lowest total price for a shopping basket of books, ap
 
 - **Language:** Java 17
 - **Framework:** Spring Boot 3.5.10
+- **Documentation:** SpringDoc OpenAPI (Swagger UI)
 - **Testing:** JUnit 5, AssertJ 3.27.7, Spring Boot Test 3.5.10
 - **Build Tool:** Maven
 
@@ -16,6 +17,16 @@ This project follows a **Clean Architecture / Domain-Driven Design (DDD)** appro
 
 - **Domain Layer:** Pure Java business logic.
 - **Infrastructure/API:** Spring Boot Controllers and Configuration.
+
+src/main/java/com/bnppf/developmentbooks
+├── domain           
+│   ├── model        
+│   └── service      
+└── infrastructure         
+    ├── api                
+    │   ├── dto            
+    │   └── mapper         
+    └── configuration
 
 ### Design Choice: Book Model
 
@@ -65,7 +76,26 @@ The commit messages indicate the specific phase of the TDD cycle:
   - [x] 3 different sets of 2 copies of the same book, plus two different titles in a basket of 8.
   
 ### API Endpoints
-- [ ] **Basket price computation endpoint:** `POST /api/basket/price`
+- [x] **Basket price computation endpoint:** `POST /api/basket/price`
+
+## API Documentation
+
+Start the app and visit: http://localhost:8080/swagger-ui.html
+
+## Future Improvements
+
+### 1. Error Handling
+**Global Exception Handler:** Implement a `@ControllerAdvice` to catch domain exceptions and return standardized, user-friendly error responses.
+
+### 2. Performance
+**Async Processing:** For extremely large baskets, the calculation could be offloaded to a background job to prevent blocking the main HTTP threads.
+
+### 3. Testing Improvement
+**CI/CD:** Set up a GitHub Actions workflow to automatically run tests and check code quality (SonarQube) on every push.
+
+### 4. Domain Expansion
+- **Dynamic Catalog:** Replace the hardcoded `Book` titles with a database-backed Catalog Service to support dynamic inventory and pricing updates.
+- **Currency Support:** Introduce a `Money` value object to handle multi-currency.
 
 ## How to Run
 
