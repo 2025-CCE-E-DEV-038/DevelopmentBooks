@@ -17,6 +17,20 @@ This project follows a **Clean Architecture / Domain-Driven Design (DDD)** appro
 - **Domain Layer:** Pure Java business logic.
 - **Infrastructure/API:** Spring Boot Controllers and Configuration.
 
+### Design Choice: Book Model
+
+I chose to implement `Book` as a class instead of an Enum.
+**Reasoning:** While an Enum is sufficient for the fixed scope of a Kata, a class provides a more realistic approach for a scalable bookshop system where inventory is dynamic.
+**Benefit:** Remains open for extension (new book titles) without recompilation.
+
+## Assumptions & Limitations
+
+Given the explicit scope of the Kata, the following assumptions were made to keep the solution simple (KISS principle):
+
+1. Input Validity: The application assumes that only the 5 specific book titles listed in the requirements are submitted to the API.
+    *Note:* In a production environment, a validation layer would be required to filter out non-eligible items before calculation to prevent financial loss.
+2. Multi-currency support is out of scope.
+
 ## Methodology
 
 I followed a strict **Red-Green-Refactor** TDD cycle for every feature:
@@ -38,17 +52,17 @@ The commit messages indicate the specific phase of the TDD cycle:
 ## Features & Progress
 
 ###  Domain Logic (Pricing Rules)
-- [ ] **Empty Basket:** Handle zero books (0 EUR).
-- [ ] **Single Book:** Basic unit price (50 EUR).
-- [ ] **Same Books:** No discount for multiple copies of the same book.
-- [ ] **Simple Sets:**
-  - [ ] 2 different books: 5% discount
-  - [ ] 3 different books: 10% discount
-  - [ ] 4 different books: 20% discount
-  - [ ] 5 different books: 25% discount
-- [ ] **Mixed Sets:** Optimization logic for complex baskets.
-  - [ ] 3 different titles in a basket of 4.
-  - [ ] 3 different sets of 2 copies of the same book, plus two different titles in a basket of 8.
+- [x] **Empty Basket:** Handle zero books (0 EUR).
+- [x] **Single Book:** Basic unit price (50 EUR).
+- [x] **Same Books:** No discount for multiple copies of the same book.
+- [x] **Simple Sets:**
+  - [x] 2 different books: 5% discount
+  - [x] 3 different books: 10% discount
+  - [x] 4 different books: 20% discount
+  - [x] 5 different books: 25% discount
+- [x] **Mixed Sets:** Optimization logic for complex baskets.
+  - [x] 3 different titles in a basket of 4.
+  - [x] 3 different sets of 2 copies of the same book, plus two different titles in a basket of 8.
   
 ### API Endpoints
 - [ ] **Basket price computation endpoint:** `POST /api/basket/price`
