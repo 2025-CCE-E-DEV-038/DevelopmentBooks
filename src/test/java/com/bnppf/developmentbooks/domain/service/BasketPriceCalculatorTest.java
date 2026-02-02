@@ -119,4 +119,19 @@ public class BasketPriceCalculatorTest {
         assertThat(basketPrice).isEqualTo(new BigDecimal("50.00"));
         assertThat(basketPrice.scale()).isEqualTo(2);
     }
+
+    @Test
+    void should_handle_large_basket_optimized_grouping() {
+        ShoppingBasket basket = new ShoppingBasket();
+        for (int i = 0; i < 10; i++) {
+            basket.addBook(new Book("Clean Code"));
+            basket.addBook(new Book("The Clean Coder"));
+            basket.addBook(new Book("Clean Architecture"));
+            basket.addBook(new Book("Test Driven Development by Example"));
+            basket.addBook(new Book("Working Effectively with Legacy Code"));
+        }
+        BigDecimal price = calculator.computePrice(basket);
+
+        assertThat(price).isEqualTo("1875.00");
+    }
 }
