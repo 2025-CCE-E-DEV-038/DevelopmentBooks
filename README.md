@@ -84,8 +84,8 @@ Start the app and visit: http://localhost:8080/swagger-ui.html
 
 ## Future Improvements
 
-### 1. Error Handling
-**Global Exception Handler:** Implement a `@ControllerAdvice` to catch domain exceptions and return standardized, user-friendly error responses.
+### 1. Internationalization (i18n)
+- **External Configuration:** Migrate validation messages from Java constants to `messages.properties` to fully support multiple languages and allow text modification without recompiling.
 
 ### 2. Performance
 **Async Processing:** For extremely large baskets, the calculation could be offloaded to a background job to prevent blocking the main HTTP threads.
