@@ -55,7 +55,9 @@ I followed a strict **Red-Green-Refactor** TDD cycle for every feature:
 ### Note to Reviewers regarding Git History
 The commit messages indicate the specific phase of the TDD cycle:
 
-- `test:` represents the **RED** phase (failing test).
+- `test:` represents the **RED** phase (failing test). I deliberately pushed these states to demonstrate how the solution evolved incrementally. 
+In a real-world enterprise CI/CD environment, I would squash these commits or strictly push only Green states to ensure the main branch build is never broken.
+
 - `feat:` represents the **GREEN** phase (simplest implementation to pass).
 - `refactor:` represents the **REFACTOR** phase (code cleanup).
 - `docs:` represents documentation updates.
