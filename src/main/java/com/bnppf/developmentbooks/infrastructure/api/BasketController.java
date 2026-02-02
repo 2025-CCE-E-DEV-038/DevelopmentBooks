@@ -7,6 +7,7 @@ import com.bnppf.developmentbooks.infrastructure.api.mapper.ShoppingBasketMapper
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,7 +42,7 @@ public class BasketController {
             @ApiResponse(responseCode = "400", description = "Invalid JSON format or missing body")
     })
     @PostMapping("/price")
-    public ResponseEntity<BigDecimal> calculatePrice(@RequestBody ShoppingBasketRequest basketRequest) {
+    public ResponseEntity<BigDecimal> calculatePrice(@RequestBody @Valid ShoppingBasketRequest basketRequest) {
         if (basketRequest.books() == null) {
             return ResponseEntity.badRequest().build();
         }
