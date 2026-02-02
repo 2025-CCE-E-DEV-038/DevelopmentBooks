@@ -17,8 +17,7 @@ import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(BasketController.class)
 class BasketControllerTest {
@@ -72,5 +71,20 @@ class BasketControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(wrongInput))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void should_return_clear_error_message_when_books_list_is_null() throws Exception {
+        String nullListPayload = """
+                {
+                }""";
+
+        mockMvc.perform(post("/api/basket/price")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(nullListPayload))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.title").value("Invalid Request"))
+                .andExpect(jsonPath("$.detail").value("Validation failed for request parameters"))
+                .andExpect(jsonPath("$.error_books").value("Book list cannot be null"));
     }
 }
