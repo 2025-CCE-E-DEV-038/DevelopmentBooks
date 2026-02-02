@@ -3,6 +3,7 @@ package com.bnppf.developmentbooks.infrastructure.api;
 import com.bnppf.developmentbooks.domain.model.ShoppingBasket;
 import com.bnppf.developmentbooks.domain.service.BasketPriceCalculator;
 import com.bnppf.developmentbooks.infrastructure.api.mapper.ShoppingBasketMapper;
+import com.bnppf.developmentbooks.infrastructure.api.validation.ValidationErrors;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -83,8 +84,8 @@ class BasketControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(nullListPayload))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.title").value("Invalid Request"))
-                .andExpect(jsonPath("$.detail").value("Validation failed for request parameters"))
-                .andExpect(jsonPath("$.error_books").value("Book list cannot be null"));
+                .andExpect(jsonPath("$.title").value(ValidationErrors.REQUEST_VALIDATION_TITLE))
+                .andExpect(jsonPath("$.detail").value(ValidationErrors.REQUEST_VALIDATION_DETAIL))
+                .andExpect(jsonPath("$.error_books").value(ValidationErrors.SHOPPING_BASKET_NULL_LIST_ERROR));
     }
 }
