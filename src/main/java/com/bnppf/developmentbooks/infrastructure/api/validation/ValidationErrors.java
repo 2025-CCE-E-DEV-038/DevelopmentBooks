@@ -11,4 +11,5 @@ public final class ValidationErrors {
     public static final String REQUEST_VALIDATION_FIELD_ERROR_PREFIX = "error_";
     // Field Errors
     public static final String SHOPPING_BASKET_NULL_LIST_ERROR= "Book list cannot be null";
+    public static final String SHOPPING_BASKET_EMPTY_LIST_ERROR= "Book list cannot be empty";
 }

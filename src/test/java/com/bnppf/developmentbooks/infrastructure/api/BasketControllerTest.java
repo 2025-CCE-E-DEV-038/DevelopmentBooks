@@ -88,4 +88,20 @@ class BasketControllerTest {
                 .andExpect(jsonPath("$.detail").value(ValidationErrors.REQUEST_VALIDATION_DETAIL))
                 .andExpect(jsonPath("$.error_books").value(ValidationErrors.SHOPPING_BASKET_NULL_LIST_ERROR));
     }
+
+    @Test
+    void should_return_clear_error_message_when_books_list_is_empty() throws Exception {
+        String emptyListPayload = """
+                {
+                   "books": []
+                }""";
+
+        mockMvc.perform(post("/api/basket/price")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(emptyListPayload))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.title").value(ValidationErrors.REQUEST_VALIDATION_TITLE))
+                .andExpect(jsonPath("$.detail").value(ValidationErrors.REQUEST_VALIDATION_DETAIL))
+                .andExpect(jsonPath("$.error_books").value(ValidationErrors.SHOPPING_BASKET_EMPTY_LIST_ERROR));
+    }
 }
