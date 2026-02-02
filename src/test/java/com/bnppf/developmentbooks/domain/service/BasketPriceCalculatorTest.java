@@ -110,4 +110,13 @@ public class BasketPriceCalculatorTest {
 
         assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(320));
     }
+    @Test
+    void should_return_a_decimal_rounded_to_2_decimal_places() {
+        ShoppingBasket basket = createBasket("Clean Code");
+
+        BigDecimal basketPrice = calculator.computePrice(basket);
+
+        assertThat(basketPrice).isEqualTo(new BigDecimal("50.00"));
+        assertThat(basketPrice.scale()).isEqualTo(2);
+    }
 }
