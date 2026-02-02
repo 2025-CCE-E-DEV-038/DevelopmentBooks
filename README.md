@@ -76,6 +76,7 @@ In a real-world enterprise CI/CD environment, I would squash these commits or st
 - [x] **Mixed Sets:** Optimization logic for complex baskets.
   - [x] 3 different titles in a basket of 4.
   - [x] 3 different sets of 2 copies of the same book, plus two different titles in a basket of 8.
+  - [x] large basket stress test.
   
 ### API Endpoints
 - [x] **Basket price computation endpoint:** `POST /api/basket/price`
@@ -84,6 +85,13 @@ In a real-world enterprise CI/CD environment, I would squash these commits or st
 
 Start the app and visit: http://localhost:8080/swagger-ui.html
 
+### DevOps & CI/CD
+
+- **GitHub Actions Pipeline:** A fully automated CI pipeline is configured to run on every push to `master`.
+    - Build Verification: Compiles the project using Maven.
+    - Automated Testing: Executes all unit tests and Integration tests to ensure no regressions.
+    - Cross-Platform Compatibility: The pipeline runs on Linux (Ubuntu) environments to ensure the application is portable (testing the Maven Wrapper permissions).
+  
 ## Future Improvements
 
 ### 1. Internationalization (i18n)
@@ -93,7 +101,7 @@ Start the app and visit: http://localhost:8080/swagger-ui.html
 **Async Processing:** For extremely large baskets, the calculation could be offloaded to a background job to prevent blocking the main HTTP threads.
 
 ### 3. Testing Improvement
-**CI/CD:** Set up a GitHub Actions workflow to automatically run tests and check code quality (SonarQube) on every push.
+**CI/CD:** Extend the current CI pipeline to include SonarQube scans to enforce code quality.
 
 ### 4. Domain Expansion
 - **Dynamic Catalog:** Replace the hardcoded `Book` titles with a database-backed Catalog Service to support dynamic inventory and pricing updates.
