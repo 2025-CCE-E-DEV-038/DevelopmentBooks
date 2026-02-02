@@ -18,7 +18,7 @@ public class BasketPriceCalculatorTest {
 
         BigDecimal basketPrice = calculator.computePrice(basket);
 
-        assertThat(basketPrice).isZero();
+        assertThat(basketPrice).isEqualTo(new BigDecimal("00.00"));
     }
 
     @Test
@@ -26,7 +26,7 @@ public class BasketPriceCalculatorTest {
         ShoppingBasket basket = createBasket("Clean Code");
         BigDecimal basketPrice = calculator.computePrice(basket);
 
-        assertThat(basketPrice).isEqualTo(BigDecimal.valueOf(50));
+        assertThat(basketPrice).isEqualTo(new BigDecimal("50.00"));
     }
 
     @Test
@@ -34,7 +34,7 @@ public class BasketPriceCalculatorTest {
         ShoppingBasket basket = createBasket("Clean Code", "Clean Code");
         BigDecimal basketPrice = calculator.computePrice(basket);
 
-        assertThat(basketPrice).isEqualTo(BigDecimal.valueOf(100));
+        assertThat(basketPrice).isEqualTo(new BigDecimal("100.00"));
     }
 
     private ShoppingBasket createBasket(String... titles) {
@@ -50,7 +50,7 @@ public class BasketPriceCalculatorTest {
         ShoppingBasket basket = createBasket("Clean Code", "The Clean Coder");
         BigDecimal basketPrice = calculator.computePrice(basket);
 
-        assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(95));
+        assertThat(basketPrice).isEqualTo(new BigDecimal("95.00"));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class BasketPriceCalculatorTest {
         ShoppingBasket basket = createBasket("Clean Code", "The Clean Coder", "Clean Architecture");
         BigDecimal basketPrice = calculator.computePrice(basket);
 
-        assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(135));
+        assertThat(basketPrice).isEqualTo(new BigDecimal("135.00"));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class BasketPriceCalculatorTest {
                 "Test Driven Development by Example");
         BigDecimal basketPrice = calculator.computePrice(basket);
 
-        assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(160));
+        assertThat(basketPrice).isEqualTo(new BigDecimal("160.00"));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class BasketPriceCalculatorTest {
 
         BigDecimal basketPrice = calculator.computePrice(basket);
 
-        assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(187.50));
+        assertThat(basketPrice).isEqualTo(new BigDecimal("187.50"));
     }
 
     @Test
@@ -93,7 +93,7 @@ public class BasketPriceCalculatorTest {
                 "Clean Architecture");
         BigDecimal basketPrice = calculator.computePrice(basket);
 
-        assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(185));
+        assertThat(basketPrice).isEqualTo(new BigDecimal("185.00"));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class BasketPriceCalculatorTest {
                 "Working Effectively With Legacy Code");
         BigDecimal basketPrice = calculator.computePrice(basket);
 
-        assertThat(basketPrice).isEqualByComparingTo(BigDecimal.valueOf(320));
+        assertThat(basketPrice).isEqualTo(new BigDecimal("320.00"));
     }
     @Test
     void should_return_a_decimal_rounded_to_2_decimal_places() {

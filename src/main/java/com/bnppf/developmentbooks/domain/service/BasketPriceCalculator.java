@@ -4,6 +4,7 @@ import com.bnppf.developmentbooks.domain.model.Book;
 import com.bnppf.developmentbooks.domain.model.ShoppingBasket;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 /**
@@ -18,6 +19,7 @@ public class BasketPriceCalculator {
             3, BigDecimal.valueOf(0.90),
             4, BigDecimal.valueOf(0.80),
             5, BigDecimal.valueOf(0.75));
+
     /**
      * Computes the lowest possible price for the given basket.
      *
@@ -26,15 +28,20 @@ public class BasketPriceCalculator {
      */
     public BigDecimal computePrice(ShoppingBasket basket) {
         if (basket.getBooks().isEmpty()) {
-            return BigDecimal.ZERO;
+            return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
         }
 
+        BigDecimal totalPrice;
         int numberOfDifferentBooks = (int) basket.getBooks().stream().distinct().count();
-        if (basket.getBooks().size() == numberOfDifferentBooks)
-            return computeBookPilePrice(basket.getBooks().size());
+        if (basket.getBooks().size() == numberOfDifferentBooks) {
+            totalPrice = computeBookPilePrice(basket.getBooks().size());
+        } else {
+            List<Set<Book>> bookPiles = rearrangeBooksIntoSets(basket.getBooks());
+            totalPrice = bookPiles.stream().map(bookPile -> computeBookPilePrice(bookPile.size())).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        List<Set<Book>> bookPiles = rearrangeBooksIntoSets(basket.getBooks());
-        return bookPiles.stream().map(bookPile -> computeBookPilePrice(bookPile.size())).reduce(BigDecimal.ZERO, BigDecimal::add);
+        }
+
+        return totalPrice.setScale(2, RoundingMode.HALF_UP);
     }
 
 
